@@ -9,22 +9,15 @@ import sys
 import time
 from dotenv import load_dotenv
 
-# Add the app directory to the path to import logic
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from logic import get_structured_intent, get_decomposed_queries, strategic_reranker, balanced_select
 
-# --- SETUP ---
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY") 
 GEMINI_API_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
     "gemini-2.5-flash-preview-09-2025:generateContent?key=" + str(api_key)
 )
-
-
-# ==============================================================================
-#  1. QUERY UNDERSTANDING LAYER (Based on Your Analysis)
-# ==============================================================================
 
 # --- PROMPT A: For Decomposing the Query into Multiple Search Intents ---
 GEMINI_DECOMPOSITION_PROMPT = """
@@ -113,7 +106,7 @@ def generate_predictions():
     
     results_list = []
 
-    with httpx.Client() as client: # Use a synchronous client for a simple script
+    with httpx.Client() as client:
         for query in test_queries:
             print(f"Processing query: '{query[:50]}...'")
             
@@ -148,7 +141,7 @@ def generate_predictions():
                 })
             print(f"Query {i+1} processed. Waiting for 5 seconds to respect API rate limits...")
             time.sleep(60) 
-    # Create DataFrame and save to CSV
+
     submission_df = pd.DataFrame(results_list)
     output_filename = 'predictions.csv'
     submission_df.to_csv(output_filename, index=False)
@@ -156,7 +149,6 @@ def generate_predictions():
     print("Please check the file to ensure it matches the format in Appendix 3.")
 
 if __name__ == "__main__":
-    # A synchronous version of the Gemini calls for the script
     def get_structured_intent(query_text: str, client: httpx.Client, api_url: str) -> str:
         payload = {"contents": [{"parts": [{"text": query_text}]}], "systemInstruction": {"parts": [{"text": GEMINI_INTENT_PROMPT}]}, "generationConfig": {"responseMimeType": "application/json", "responseSchema": GEMINI_INTENT_SCHEMA, "temperature": 0.0}}
         try:
