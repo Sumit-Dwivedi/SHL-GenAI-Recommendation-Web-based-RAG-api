@@ -1,0 +1,23 @@
+# This is for creating and running the API and search
+# You can install this in your venv with: pip install -r api_requirements.txt
+
+# For the AI models (embeddings)
+sentence-transformers
+torch
+
+# For the API
+fastapi
+uvicorn[standard]
+gunicorn
+
+# For the search (cosine similarity)
+scikit-learn
+
+# For reading the Excel evaluation file
+pandas
+openpyxl
+
+
+# --- NEW ---
+# For making API calls to Gemini
+httpx
