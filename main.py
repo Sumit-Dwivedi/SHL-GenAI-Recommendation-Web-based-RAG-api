@@ -12,10 +12,8 @@ import os
 from dotenv import load_dotenv
 from contextlib import asynccontextmanager
 
-# Import the logic we refactored
 from logic import get_structured_intent, get_decomposed_queries, strategic_reranker, balanced_select
 
-# --- Pydantic Models for API ---
 class RecommendRequest(BaseModel):
     query: str
 
@@ -31,10 +29,9 @@ class AssessmentResponse(BaseModel):
 class RecommendResponse(BaseModel):
     recommended_assessments: List[AssessmentResponse]
 
-# --- Global Data Store ---
 model_data = {}
 
-load_dotenv()  # <-- 2. CALL THIS FUNCTION HERE
+load_dotenv()
 
 api_key = os.environ.get("GEMINI_API_KEY")
 GEMINI_API_URL = (
@@ -42,10 +39,8 @@ GEMINI_API_URL = (
     "gemini-2.5-flash-preview-09-2025:generateContent?key=" + str(api_key)
 )
 
-# --- FastAPI Lifespan Events (replaces on_event) ---
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: Load models, data, and HTTP client
     print("Server starting up...")
     model_data['http_client'] = httpx.AsyncClient()
     
@@ -65,7 +60,6 @@ async def lifespan(app: FastAPI):
 
     yield
 
-    # Shutdown: Close the HTTP client
     print("Server shutting down...")
     await model_data['http_client'].aclose()
 
@@ -73,15 +67,14 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="SHL Assessment Recommendation System",
     description="An AI-powered RAG API to recommend SHL assessments.",
-    version="3.0.0", # Final Version
+    version="3.0.0",
     lifespan=lifespan
 )
 origins = [
-    "http://localhost",         # Allows local testing
-    "http://localhost:3000",    # If your frontend runs on port 3000
+    "http://localhost", 
+    "http://localhost:3000",  
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
-    # "https://your-frontend-domain.com" # Add your future web app's URL here
 ]
 
 app.add_middleware(
@@ -130,7 +123,6 @@ async def recommend_assessments_endpoint(request: RecommendRequest):
         ranked = strategic_reranker(candidates, intent)
         top_results = balanced_select(ranked, 10)
 
-        # Format response according to Pydantic model
         recommendations = []
         for item in top_results:
             assessment_data = item['assessment']['original_data']

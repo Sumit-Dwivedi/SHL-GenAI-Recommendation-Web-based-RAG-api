@@ -2,10 +2,6 @@ import httpx
 import json
 import time
 
-# ==============================================================================
-#  1. QUERY UNDERSTANDING LAYER (Prompts & Schemas)
-# ==============================================================================
-
 GEMINI_DECOMPOSITION_PROMPT = """
 You are a search query decomposition expert. Your task is to break down a user's complex hiring request into a list of simple, self-contained search queries. Each query should focus on a single, distinct aspect (e.g., one for a technical skill, one for a behavioral skill).
 Return a JSON object with a single key "decomposed_queries" which is an array of strings.
@@ -68,11 +64,6 @@ GEMINI_INTENT_SCHEMA = {
     }
 }
 
-
-# ==============================================================================
-#  2. HELPER FUNCTIONS FOR GEMINI API CALLS
-# ==============================================================================
-
 async def get_decomposed_queries(query_text: str, client: httpx.AsyncClient, api_url: str) -> list:
     payload = {
         "contents": [{"parts": [{"text": query_text}]}],
@@ -113,14 +104,9 @@ async def get_structured_intent(query_text: str, client: httpx.AsyncClient, api_
         print(f"Gemini intent extraction failed: {e}")
         return {}
 
-# ==============================================================================
-#  3. RE-RANKING & SELECTION LOGIC
-# ==============================================================================
 
 def strategic_reranker(candidates: list, intent: dict) -> list:
-    """
-    Implements the "Improve Retrieval Strategy" recommendations from your analysis.
-    """
+
     final_results = []
     
     tech_skills = intent.get('primary_technical_skills', [])
