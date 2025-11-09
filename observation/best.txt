@@ -1,0 +1,85 @@
+API Key loaded: Yes
+--- Loading Ground Truth and Models ---
+Loading embedding model (multi-qa-mpnet-base-dot-v1)...
+Loading vector database...
+--- Setup Complete. Starting Evaluation ---
+
+[Structured Intent]: {'job_domain': 'engineering', 'job_level': 'mid-professional', 'negative_keywords': ['javascript'], 'primary_intent': 'technical_screening', 'primary_soft_skills': ['Collaboration', 'Communication', 'Stakeholder Management'], 'primary_technical_skills': ['Java Programming', 'Object-Oriented Design']}  
+[Decomposed Queries]: ['Java programming skills assessment (40 minutes max)', 'Behavioral assessment for collaboration and teamwork skills']
+
+--- Analysis for Query 1/10 ---
+QUERY: "I am hiring for Java developers who can also collaborate effectively with my business teams. Looking for an assessment(s) that can be completed in 40 ..."
+Recall@10 = 0.80 (Found 4/5)
+
+[Structured Intent]: {'job_domain': 'sales', 'job_level': 'entry-level', 'negative_keywords': ['Salesforce', 'CRM administration'], 'primary_intent': 'behavioral_fit', 'primary_soft_skills': ['Resilience', 'Communication', 'Achievement Orientation', 'Customer Focus'], 'primary_technical_skills': ['Verify - Numerical Ability', 'Verify - Verbal Ability', 'Situational Judgment Test - Sales Focus']}
+[Decomposed Queries]: ['Sales aptitude test for recent college graduates', 'Behavioral assessment for communication and negotiation skills (sales)', 'Time-efficient sales assessment options (under 60 minutes)']
+
+--- Analysis for Query 2/10 ---
+QUERY: "I want to hire new graduates for a sales role in my company, the budget is for about an hour for each test. Give me some options..."
+Recall@10 = 0.22 (Found 2/9)
+
+[Structured Intent]: {'job_domain': 'operations', 'job_level': 'executive', 'negative_keywords': ['entry-level', 'technical screening', 'data entry'], 'primary_intent': 'behavioral_fit', 'primary_soft_skills': ['Strategic Leadership', 'Cultural Adaptability', 'Executive Presence', 'Decision Making'], 'primary_technical_skills': ['Occupational Personality Questionnaire OPQ32r', 'Executive Leadership Assessment', 'Cross-Cultural Competency Assessment']}
+[Decomposed Queries]: ['Executive assessment for Chief Operating Officer competencies', 'Cultural intelligence assessment for business leaders in China', 'Time-efficient executive assessment (60 minutes)']
+
+--- Analysis for Query 3/10 ---
+QUERY: "I am looking for a COO for my company in China and I want to see if they are culturally a right fit for our company. Suggest me an assessment that the..."
+Recall@10 = 0.67 (Found 4/6)
+
+[Structured Intent]: {'job_domain': 'marketing', 'job_level': 'senior', 'negative_keywords': ['sales', 'quota', 'commission'], 'primary_intent': 'behavioral_fit', 'primary_soft_skills': ['Leadership', 'Coaching', 'Strategic Thinking', 'Communication', 'Stakeholder Management'], 'primary_technical_skills': ['Digital Content Strategy', 'Brand Management', 'Verify - Critical Reasoning']}
+[Decomposed Queries]: ['Assessment for radio programming strategy and brand management', 'Situational judgment test for sales team collaboration and creative input', 'Test for digital content conceptualization and strategy', 'General awareness and current events quiz for media professionals', 'Leadership and coaching skills assessment for talent development', 'Advanced English communication and writing skills test']
+
+--- Analysis for Query 4/10 ---
+QUERY: "KEY RESPONSIBITILES:
+
+Manage the sound-scape of the station through appropriate creative and marketing interventions to Increase or Maintain the liste..."
+Recall@10 = 0.20 (Found 1/5)
+
+[Structured Intent]: {'job_domain': 'marketing', 'job_level': 'mid-professional', 'negative_keywords': ['sales'], 'primary_intent': 'technical_screening', 'primary_soft_skills': ['Creativity', 'Attention to Detail', 'Time Management'], 'primary_technical_skills': ['SEO Optimization', 'Content Management Systems (CMS)', 'English Grammar and Style']}
+[Decomposed Queries]: ['English writing and grammar proficiency test for content writers', 'SEO knowledge assessment for content creation']
+
+--- Analysis for Query 5/10 ---
+QUERY: "Content Writer required, expert in English and SEO...."
+Recall@10 = 0.60 (Found 3/5)
+
+[Structured Intent]: {'job_domain': 'engineering', 'job_level': 'mid-professional', 'negative_keywords': [], 'primary_intent': 'technical_screening', 'primary_soft_skills': ['Problem Solving', 'Communication'], 'primary_technical_skills': ['Java', 'JavaScript', 'Selenium WebDriver', 'Page Object Model', 'SQL server', 'Test Case Management']}
+[Decomposed Queries]: ['Practical assessment for Java and JavaScript automation using Selenium WebDriver', 'SQL server knowledge test for QA engineers', 'Test case management and manual testing scenario assessment', 'Behavioral assessment for problem-solving and communication skills']
+
+--- Analysis for Query 6/10 ---
+QUERY: "Find me 1 hour long assesment for the below job at SHL
+Job Description
+
+ Join a community that is shaping the future of work! SHL, People Science. Peo..."
+Recall@10 = 0.33 (Found 3/9)
+
+[Structured Intent]: {'job_domain': 'administrative', 'job_level': 'entry-level', 'negative_keywords': [], 'primary_intent': 'general_role_fit', 'primary_soft_skills': ['Attention to Detail', 'Organization', 'Reliability'], 'primary_technical_skills': ['Basic Computer Literacy', 'Verify - Numerical Ability', 'Verify - Verbal Ability']}
+[Decomposed Queries]: ['Entry-level banking operations knowledge test', 'Administrative and organizational skills assessment for junior staff', 'Data entry and attention to detail test']
+
+--- Analysis for Query 7/10 ---
+QUERY: "ICICI Bank Assistant Admin, Experience required 0-2 years, test should be 30-40 mins long..."
+Recall@10 = 0.00 (Found 0/6)
+
+[Structured Intent]: {'job_domain': 'marketing', 'job_level': 'manager', 'negative_keywords': ['sales', 'quota'], 'primary_intent': 'behavioral_fit', 'primary_soft_skills': ['Strategic Thinking', 'Leadership', 'Collaboration', 'Storytelling'], 'primary_technical_skills': ['Community Building', 'Event Management', 'Brand Positioning', 'Demand Generation Strategy', 'Market Intelligence']}
+[Decomposed Queries]: ['Assessment for B2B Marketing Strategy and Leadership skills', 'Practical test for building and engaging developer communities', 'Evaluation of brand positioning and corporate storytelling abilities', 'Skills test for large-scale event management and industry partnership negotiation', 'Knowledge assessment on demand generation and marketing funnel optimization', 'Test for leveraging market intelligence and competitive analysis in marketing']
+
+--- Analysis for Query 8/10 ---
+QUERY: "We're looking for a Marketing Manager who can drive Recro’s brand positioning, community growth, and overall marketing strategy to fuel business growt..."
+Recall@10 = 0.00 (Found 0/5)
+
+[Structured Intent]: {'job_domain': 'hr', 'job_level': 'mid-professional', 'negative_keywords': ['administrative assistant', 'generalist HR', 'recruiter'], 'primary_intent': 'behavioral_fit', 'primary_soft_skills': ['Decision Making', 'Collaboration', 'Building Relationships', 'Planning and Organizing', 'Delivering Results', 'Adaptability'], 'primary_technical_skills': ['Occupational Personality Questionnaire OPQ32r', 'Verify Numerical', 'Verify Verbal', 'SPSS', 'R (Programming Language)', 'Validation Studies']}
+[Decomposed Queries]: ['Technical assessment for I/O Psychology and talent assessment methodologies (e.g., validation, job analysis)', 'Statistical proficiency test for HR/Talent Analytics using R or SPSS', 'Consulting skills assessment: Presenting complex technical results to non-technical stakeholders', 'Behavioral assessment for consultant competencies: Collaboration, Decision Making, and Planning']
+
+--- Analysis for Query 9/10 ---
+QUERY: "Based on the JD below recommend me assessment for the Consultant position in my organizations. The assessment should not be more than 90 mins
+b Descri..."
+Recall@10 = 0.00 (Found 0/5)
+
+[Structured Intent]: {'job_domain': 'engineering', 'job_level': 'senior', 'negative_keywords': [], 'primary_intent': 'technical_screening', 'primary_soft_skills': ['Analytical Thinking', 'Problem Solving', 'Attention to Detail'], 'primary_technical_skills': ['SQL', 'Excel', 'Python']}
+[Decomposed Queries]: ['Practical SQL test for senior data analyst', 'Advanced Excel simulation for data analysis', 'Python knowledge test for data science']
+
+--- Analysis for Query 10/10 ---
+QUERY: "I want to hire a Senior Data Analyst with 5 years of experience and expertise in SQL, Excel and Python. The assessment can be 1-2 hour long..."
+Recall@10 = 0.40 (Found 4/10)
+
+
+--- Evaluation Complete ---
+Final Mean Recall@10 (RAG): 0.3222

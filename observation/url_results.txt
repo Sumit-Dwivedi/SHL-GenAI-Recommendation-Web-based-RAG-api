@@ -1,0 +1,59 @@
+(venv) PS C:\Users\dwive\Documents\Programming\Python\SHL\chatpgt\Scraper> python url_checker.py
+--- Starting URL Sanity Check ---
+Loaded 353 unique, normalized URLs from 'shl_test_solutions_detailed.json'.
+Loaded 54 unique URLs from the 'Train-Set' sheet.
+
+--- Found Mismatched URLs ---
+The following URLs from your TRAIN-SET do not exist in your scraped JSON data:
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/automata-fix-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/core-java-entry-level-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/java-8-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/core-java-advanced-level-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/entry-level-sales-7-1/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/entry-level-sales-sift-out-7-1/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/entry-level-sales-solution/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/sales-representative-solution/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/technical-sales-associate-solution/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/svar-spoken-english-indian-accent-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/english-comprehension-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/opq-leadership-report/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/opq-team-types-and-leadership-styles-report
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/global-skills-assessment/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/verify-verbal-ability-next-generation/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/shl-verify-interactive-inductive-reasoning/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/marketing-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/drupal-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/written-english-v1/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/occupational-personality-questionnaire-opq32r/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/search-engine-optimization-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/automata-selenium/
+  - MISSING: https://www.shl.com/products/product-catalog/view/professional-7-1-solution/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/javascript-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/htmlcss-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/css3-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/selenium-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/sql-server-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/automata-sql-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/manual-testing-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/administrative-professional-short-form/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/verify-numerical-ability/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/financial-professional-short-form/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/bank-administrative-assistant-short-form/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/general-entry-level-data-entry-7-0-solution/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/basic-computer-literacy-windows-10-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/manager-8-0-jfa-4310/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/microsoft-excel-365-essentials-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/digital-advertising-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/writex-email-writing-sales-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/shl-verify-interactive-numerical-calculation/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/professional-7-1-solution/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/sql-server-analysis-services-%28ssas%29-%28new%29/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/python-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/tableau-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/microsoft-excel-365-new/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/professional-7-0-solution-3958/
+  - MISSING: https://www.shl.com/solutions/products/product-catalog/view/data-warehousing-concepts/
+
+--- URL Check Complete ---
+❌ FAILED: Found 48 URLs in your training set that are not in your JSON data.
+This is contributing to your low score. You must fix your scraper or manually correct the data to improve results.
