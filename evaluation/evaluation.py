@@ -9,21 +9,14 @@ import httpx
 import time   
 from dotenv import load_dotenv
 
-# --- SCRIPT SETUP ---
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY") 
 print(f"API Key loaded: {'Yes' if api_key else 'No'}")
 
-# Use a stable Gemini model endpoint
 GEMINI_API_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
     "gemini-2.5-flash-preview-09-2025:generateContent?key=" + str(api_key)
 )
-
-
-# ==============================================================================
-#  1. QUERY UNDERSTANDING LAYER (Based on Your Analysis)
-# ==============================================================================
 
 # --- PROMPT A: For Decomposing the Query into Multiple Search Intents ---
 GEMINI_DECOMPOSITION_PROMPT = """
@@ -88,8 +81,6 @@ GEMINI_INTENT_SCHEMA = {
     }
 }
 
-# --- HELPER FUNCTIONS FOR GEMINI ---
-
 def get_decomposed_queries(query_text: str, client: httpx.Client) -> list:
     payload = {
         "contents": [{"parts": [{"text": query_text}]}],
@@ -132,15 +123,7 @@ def get_structured_intent(query_text: str, client: httpx.Client) -> dict:
             time.sleep(120)
     return {}
 
-
-# ==============================================================================
-#  2. RETRIEVAL & RE-RANKING LAYER
-# ==============================================================================
-
 def strategic_reranker(candidates: list, intent: dict) -> list:
-    """
-    Implements the "Improve Retrieval Strategy" recommendations from your analysis.
-    """
     final_results = []
     
     tech_skills = intent.get('primary_technical_skills', [])
@@ -151,70 +134,58 @@ def strategic_reranker(candidates: list, intent: dict) -> list:
 
     for cand in candidates:
         assessment = cand['assessment']
-        score = cand['score'] # Initial semantic score from retrieval
+        score = cand['score']
         text = assessment['search_text'].lower()
         name = assessment['original_data']['name'].lower()
 
-        # Rule 1: Negative Keyword Penalty
         if any(kw.lower() in text for kw in negative_kws):
             score *= 0.5
 
-        # Rule 2: Prioritize Practical Simulations for technical roles
         if primary_intent == 'technical_screening' and 'practical_simulation' in text:
             score *= 1.25
 
-        # Rule 3: Seniority Handling
         if job_level in ["senior", "manager", "executive"] and "appropriate_for_senior" in text:
             score *= 1.15
         if job_level == "entry-level" and "entry_level" not in text:
             score *= 0.9
 
-        # Rule 4: Intent Matching
         if primary_intent == 'behavioral_fit' and 'behavioral' in text:
             score *= 1.2
-        
-        # Rule 5: Boost direct keyword matches in assessment name
+
         all_kws = tech_skills + soft_skills
         if any(kw.lower() in name for kw in all_kws):
             score *= 1.1
 
         if primary_intent == 'general_role_fit' and any(kw in text for kw in ["foundational_numerical", "foundational_verbal", "foundational_computer"]):
-            score *= 1.2 # Strong boost for core skills when a general fit is needed
+            score *= 1.2
 
         final_results.append({'assessment': assessment, 'score': score})
 
     return sorted(final_results, key=lambda x: x['score'], reverse=True)
 
 def get_recommendations(query_text, model, assessments, emb_matrix, gem_client, k=10):
-    # Step 1: Extract the structured intent for re-ranking later
     intent = get_structured_intent(query_text, gem_client)
     print(f"\n[Structured Intent]: {intent}")
 
-    # Step 2: Decompose the query into multiple search vectors
     sub_queries = get_decomposed_queries(query_text, gem_client)
     print(f"[Decomposed Queries]: {sub_queries}")
 
-    # Step 3: Retrieve candidates for EACH sub-query and combine them
     all_candidates = {}
     for sub_query in sub_queries:
         query_emb = model.encode(sub_query).reshape(1, -1)
         sims = cosine_similarity(query_emb, emb_matrix)[0]
-        
-        # Retrieve a smaller pool for each sub-query to get diverse results
+
         top_indices = np.argsort(sims)[-40:][::-1]
         
         for i in top_indices:
             url = assessments[i]['original_data']['url']
-            # Add to a dictionary to auto-deduplicate, keeping the highest score for each unique URL
             if url not in all_candidates or sims[i] > all_candidates[url]['score']:
                 all_candidates[url] = {'assessment': assessments[i], 'score': sims[i]}
 
     candidates = list(all_candidates.values())
 
-    # Step 4: Apply the strategic re-ranker to the combined, richer pool of candidates
     ranked = strategic_reranker(candidates, intent)
-    
-    # Step 5: Apply balanced selection for final result diversity
+
     top10 = balanced_select(ranked, k)
     return [x['assessment']['original_data']['url'] for x in top10]
 
@@ -228,26 +199,17 @@ def balanced_select(results, k=10):
         if url not in added_urls:
             final.append(item)
             added_urls.add(url)
-    
-    # Add top 5 tech and top 5 behavioral, ensuring no duplicates
+
     list(map(add_to_final, tech[:5]))
     list(map(add_to_final, behavior[:5]))
-    
-    # Fill any remaining spots with the highest-scored overall results
     if len(final) < k:
         list(map(add_to_final, results))
     
     return final[:k]
 
-
-# ==============================================================================
-#  3. UTILITY & EVALUATION FUNCTIONS
-# ==============================================================================
-
 def normalize_url(url):
     if not isinstance(url, str): return ""
     normalized = url.lower().strip().replace("https://www.","https://").strip('/')
-    # This line is critical to handle the data inconsistency you found
     normalized = normalized.replace("shl.com/solutions/products", "shl.com/products")
     return normalized
 
@@ -278,11 +240,6 @@ def calculate_recall_at_k(predicted_urls, relevant_urls, k=10):
     recall = len(found_hits) / len(relevant_set) if relevant_set else 0
     return recall, found_hits, missed_hits, incorrect_predictions
 
-
-# ==============================================================================
-#  4. MAIN EXECUTION BLOCK
-# ==============================================================================
-
 def main():
     if not api_key:
         print("CRITICAL ERROR: GEMINI_API_KEY environment variable is missing.")
@@ -302,7 +259,7 @@ def main():
             recalls.append(r)
 
             print(f"\n--- Analysis for Query {i+1}/{len(truth)} ---")
-            print(f"QUERY: \"{q[:150]}...\"") # Print truncated query
+            print(f"QUERY: \"{q[:150]}...\"") 
             print(f"Recall@10 = {r:.2f} (Found {len(found)}/{len(rel)})")
 
     if recalls:
