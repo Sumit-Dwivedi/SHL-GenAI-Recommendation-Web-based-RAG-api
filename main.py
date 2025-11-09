@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 from contextlib import asynccontextmanager
 
 # Import the logic we refactored
-from .logic import get_structured_intent, get_decomposed_queries, strategic_reranker, balanced_select
+from logic import get_structured_intent, get_decomposed_queries, strategic_reranker, balanced_select
 
 # --- Pydantic Models for API ---
 class RecommendRequest(BaseModel):

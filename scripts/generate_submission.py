@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 # Add the app directory to the path to import logic
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from app.logic import get_structured_intent, get_decomposed_queries, strategic_reranker, balanced_select
+from logic import get_structured_intent, get_decomposed_queries, strategic_reranker, balanced_select
 
 # --- SETUP ---
 load_dotenv()
